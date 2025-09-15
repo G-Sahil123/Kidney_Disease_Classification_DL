@@ -23,10 +23,10 @@ class PredictionPipeline:
         print(result)
 
         if result[0] == 1:
-            prediction = 'Tumor'
+            prediction = 'Cyst'
             return [{ "image" : prediction}]
         elif result[0] == 2:
-            prediction = 'Cyst'
+            prediction = 'Tumor'
             return [{ "image" : prediction}]
         elif result[0] == 3:
             prediction = 'Stone'
