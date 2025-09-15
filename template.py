@@ -3,7 +3,7 @@ from pathlib import Path
 import logging
 
 #logging string
-logging.basicConfig(level=logging.INFO,format='[%(asctime)s]: %(message)s:')
+logging.basicConfig(level=logging.INFO, format='[%(asctime)s]: %(message)s:')
 
 project_name = 'cnnClassifier'
 
@@ -24,7 +24,10 @@ list_of_files = [
     "setup.py",
     "research/trials.ipynb",
     "templates/index.html"
+
+
 ]
+
 
 for filepath in list_of_files:
     filepath = Path(filepath)
@@ -42,4 +45,4 @@ for filepath in list_of_files:
 
 
     else:
-        logging.info(f"{filename} already exists")
+        logging.info(f"{filename} is already exists")

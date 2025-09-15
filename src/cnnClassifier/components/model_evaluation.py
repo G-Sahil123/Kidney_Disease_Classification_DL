@@ -5,6 +5,7 @@ from urllib.parse import urlparse
 import tensorflow as  tf
 from cnnClassifier.entity.config_entity import EvaluationConfig
 from src.cnnClassifier.utils.common import read_yaml, create_directories, save_json
+from mlflow.tracking import MlflowClient
 
 class Evaluation:
     def __init__(self, config: EvaluationConfig):
@@ -44,7 +45,7 @@ class Evaluation:
     def evaluation(self):
         self.model = self.load_model(self.config.path_of_model)
         self._valid_generator()
-        self.score = model.evaluate(self.valid_generator)
+        self.score = self.model.evaluate(self.valid_generator)
         self.save_score()
 
     def save_score(self):
@@ -71,3 +72,22 @@ class Evaluation:
                 mlflow.keras.log_model(self.model, "model", registered_model_name="VGG16Model")
             else:
                 mlflow.keras.log_model(self.model, "model")
+    
+    def stage_model(self, model_name: str = "VGG16Model", stage: str = "Staging"):
+        client = MlflowClient()
+
+        # Get the latest version of the registered model
+        latest_version_info = client.get_latest_versions(model_name, stages=["None"])
+        if latest_version_info:
+            version = latest_version_info[0].version
+
+            # Transition to desired stage
+            client.transition_model_version_stage(
+                name=model_name,
+                version=version,
+                stage=stage,
+                archive_existing_versions=False
+            )
+            print(f"✅ Model {model_name} version {version} moved to {stage} stage.")
+        else:
+            print(f"⚠️ No versions of {model_name} found to transition.")                   

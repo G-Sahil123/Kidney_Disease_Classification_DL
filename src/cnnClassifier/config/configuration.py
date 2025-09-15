@@ -1,9 +1,12 @@
-from src.cnnClassifier.constants import *
-from src.cnnClassifier.utils.common import read_yaml,create_directories,save_json
-from src.cnnClassifier.entity.config_entity import (DataIngestionConfig,PrepareBaseModelConfig,
-                                                    TrainingConfig,EvaluationConfig)
+from cnnClassifier.constants import *
 import os
+from cnnClassifier.utils.common import read_yaml, create_directories,save_json
+from cnnClassifier.entity.config_entity import (DataIngestionConfig,
+                                                PrepareBaseModelConfig,
+                                                TrainingConfig,
+                                                EvaluationConfig)
 
+from pathlib import Path
 class ConfigurationManager:
     def __init__(
         self,
@@ -14,7 +17,7 @@ class ConfigurationManager:
         self.params = read_yaml(params_filepath)
 
         create_directories([self.config.artifacts_root])
-        
+
 
     
     def get_data_ingestion_config(self) -> DataIngestionConfig:
@@ -30,6 +33,9 @@ class ConfigurationManager:
         )
 
         return data_ingestion_config
+    
+
+
     
     def get_prepare_base_model_config(self) -> PrepareBaseModelConfig:
         config = self.config.prepare_base_model
@@ -49,6 +55,9 @@ class ConfigurationManager:
 
         return prepare_base_model_config
     
+
+
+
     def get_training_config(self) -> TrainingConfig:
         training = self.config.training
         prepare_base_model = self.config.prepare_base_model
@@ -69,15 +78,15 @@ class ConfigurationManager:
             params_image_size=params.IMAGE_SIZE
         )
 
-        return training_config    
+        return training_config
     
 
-        
+
     def get_evaluation_config(self) -> EvaluationConfig:
         eval_config = EvaluationConfig(
             path_of_model=Path("artifacts/training/model.h5"),
             training_data=Path("artifacts/data_ingestion/CT-KIDNEY-DATASET-Normal-Cyst-Tumor-Stone"),
-            mlflow_uri="https://dagshub.com/G-Sahil123/Kidney_Disease_Classification_DL.mlflow",
+            mlflow_uri="https://dagshub.com/entbappy/Kidney_Disease_Classification_DL.mlflow",
             all_params=self.params,
             params_image_size=self.params.IMAGE_SIZE,
             params_batch_size=self.params.BATCH_SIZE

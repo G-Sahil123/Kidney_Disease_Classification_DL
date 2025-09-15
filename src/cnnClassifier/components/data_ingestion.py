@@ -26,6 +26,8 @@ class DataIngestion:
             gdown.download(prefix+file_id,zip_download_dir)
 
             logger.info(f"Downloaded data from {dataset_url} into file {zip_download_dir}")
+            return ""
+        
 
         except Exception as e:
             raise e
