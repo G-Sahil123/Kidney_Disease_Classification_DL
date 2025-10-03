@@ -17,8 +17,9 @@ class EvaluationPipeline:
         evaluation = Evaluation(eval_config)
         evaluation.evaluation()
         evaluation.save_score()
-        evaluation.log_into_mlflow()
-        evaluation.stage_model(model_name="VGG16Model",stage="Staging")        
+        # Enable this if you want to experiment for fine tuning
+        # evaluation.log_into_mlflow()
+        # evaluation.stage_model(model_name="VGG16Model",stage="Staging")        
 
 
 
