@@ -3,15 +3,10 @@
 ## **Table of Contents**
 - [Project Overview](#project-overview)  
 - [Features](#features)  
-- [Project Structure](#project-structure)  
+- [Workflows](#workflows)  
 - [Installation](#installation)  
 - [Usage](#usage)  
-- [Data](#data)  
-- [Pipeline Stages](#pipeline-stages)  
-- [MLflow Integration](#mlflow-integration)  
-- [CI/CD Deployment](#cicd-deployment)  
-- [Contributing](#contributing)  
-- [License](#license)  
+ 
 
 ---
 
@@ -49,7 +44,7 @@ We use **transfer learning** with pre-trained CNN model VGG16 to improve accurac
 8. Update the dvc.yaml
 9. app.py
 
-# How to run?
+# INSTALLATION
 ### STEPS:
 
 Clone the repository
