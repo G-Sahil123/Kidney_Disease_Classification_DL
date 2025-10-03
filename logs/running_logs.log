@@ -102,3 +102,10 @@
 [2025-09-15 21:57:41,322: INFO: common: json file saved at: scores.json]
 [2025-09-15 21:57:48,470: WARNING: save: Found untraced functions such as _jit_compiled_convolution_op, _jit_compiled_convolution_op, _jit_compiled_convolution_op, _jit_compiled_convolution_op, _jit_compiled_convolution_op while saving (showing 5 of 14). These functions will not be directly callable after loading.]
 [2025-09-15 21:57:50,610: INFO: builder_impl: Assets written to: C:\Users\anssa\AppData\Local\Temp\tmphxq_hy5i\model\data\model\assets]
+[2025-10-04 00:27:01,230: INFO: _internal: [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:8080
+ * Running on http://192.168.245.1:8080]
+[2025-10-04 00:27:01,230: INFO: _internal: [33mPress CTRL+C to quit[0m]
+[2025-10-04 00:27:08,057: INFO: _internal: 192.168.245.1 - - [04/Oct/2025 00:27:08] "GET / HTTP/1.1" 200 -]
+[2025-10-04 00:27:45,620: INFO: _internal: 192.168.245.1 - - [04/Oct/2025 00:27:45] "POST /predict HTTP/1.1" 200 -]
