@@ -128,3 +128,9 @@
 [2025-11-13 16:42:12,938: INFO: stage_01_data_ingestion: >>>>>> stage Data Ingestion stage completed <<<<<<
 
 x==========x]
+[2025-11-13 16:43:29,406: INFO: common: yaml file: config\config.yaml loaded successfully]
+[2025-11-13 16:43:29,408: INFO: common: yaml file: params.yaml loaded successfully]
+[2025-11-13 16:43:29,409: INFO: common: created directory at: artifacts]
+[2025-11-13 16:47:16,984: INFO: common: json file saved at: scores.json]
+[2025-11-13 16:47:20,919: WARNING: save: Found untraced functions such as _jit_compiled_convolution_op, _jit_compiled_convolution_op, _jit_compiled_convolution_op, _jit_compiled_convolution_op, _jit_compiled_convolution_op while saving (showing 5 of 14). These functions will not be directly callable after loading.]
+[2025-11-13 16:47:21,620: INFO: builder_impl: Assets written to: C:\Users\anssa\AppData\Local\Temp\tmpl9j79hzd\model\data\model\assets]
