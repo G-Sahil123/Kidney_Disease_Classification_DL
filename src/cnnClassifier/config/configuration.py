@@ -83,12 +83,17 @@ class ConfigurationManager:
 
 
     def get_evaluation_config(self) -> EvaluationConfig:
+        training_data = os.path.join(self.config.data_ingestion.unzip_dir, "CT-KIDNEY-DATASET-Normal-Cyst-Tumor-Stone")
+        create_directories([
+            Path(self.config.evaluation.root_dir)
+        ])
         eval_config = EvaluationConfig(
-            path_of_model=Path("artifacts/training/model.h5"),
-            training_data=Path("artifacts/data_ingestion/CT-KIDNEY-DATASET-Normal-Cyst-Tumor-Stone"),
-            mlflow_uri="https://dagshub.com/entbappy/Kidney_Disease_Classification_DL.mlflow",
+            path_of_model=Path(self.config.evaluation.trained_model_path),
+            training_data=Path(training_data),
+            mlflow_uri="https://dagshub.com/G-Sahil123/Kidney_Disease_Classification_DL.mlflow",
             all_params=self.params,
             params_image_size=self.params.IMAGE_SIZE,
-            params_batch_size=self.params.BATCH_SIZE
+            params_batch_size=self.params.BATCH_SIZE,
+            metrics=Path(self.config.evaluation.metrics)
         )
         return eval_config

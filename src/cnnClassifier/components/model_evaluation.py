@@ -4,7 +4,7 @@ import mlflow.keras
 from urllib.parse import urlparse
 import tensorflow as  tf
 from cnnClassifier.entity.config_entity import EvaluationConfig
-from src.cnnClassifier.utils.common import read_yaml, create_directories, save_json
+from src.cnnClassifier.utils.common import save_json
 from mlflow.tracking import MlflowClient
 
 class Evaluation:
@@ -16,7 +16,7 @@ class Evaluation:
 
         datagenerator_kwargs = dict(
             rescale = 1./255,
-            validation_split=0.30
+            validation_split=0.20
         )
 
         dataflow_kwargs = dict(
@@ -50,7 +50,7 @@ class Evaluation:
 
     def save_score(self):
         scores = {"loss": self.score[0], "accuracy": self.score[1]}
-        save_json(path=Path("scores.json"), data=scores)
+        save_json(path=self.config.metrics, data=scores)
 
     
     def log_into_mlflow(self):
@@ -64,15 +64,11 @@ class Evaluation:
             )
             # Model registry does not work with file store
             if tracking_url_type_store != "file":
-
-                # Register the model
-                # There are other ways to use the Model Registry, which depends on the use case,
-                # please refer to the doc for more information:
-                # https://mlflow.org/docs/latest/model-registry.html#api-workflow
                 mlflow.keras.log_model(self.model, "model", registered_model_name="VGG16Model")
             else:
                 mlflow.keras.log_model(self.model, "model")
-    
+
+
     def stage_model(self, model_name: str = "VGG16Model", stage: str = "Staging"):
         client = MlflowClient()
 
@@ -88,6 +84,6 @@ class Evaluation:
                 stage=stage,
                 archive_existing_versions=False
             )
-            print(f"✅ Model {model_name} version {version} moved to {stage} stage.")
+            print(f" Model {model_name} version {version} moved to {stage} stage.")
         else:
-            print(f"⚠️ No versions of {model_name} found to transition.")                   
+            print(f"No versions of {model_name} found to transition.")    
